@@ -73,7 +73,7 @@ const Post = () => {
 
       <div className="h-[250px] md:h-[500px]">
         <img
-          src={`http://localhost:5000/${post.imageData}`}
+          src={`/${post.imageData}`}
           alt={post.imageName}
           className="w-full h-[100%] object-contain"
         />

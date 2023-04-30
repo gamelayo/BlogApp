@@ -14,7 +14,7 @@ const PostItem = ({ post }) => {
       <div className="my-10 mx-10 flex flex-col md:flex-row gap-3">
         <div className="w-full md:w-[40%]">
           <img
-            src={`http://localhost:5000/${post.imageData}`}
+            src={`/${post.imageData}`}
             alt={post.imageName}
             className="w-full h-[100%]"
           />
