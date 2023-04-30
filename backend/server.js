@@ -15,17 +15,24 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
-// Home Page localhost:5000
-app.get("/", (req, res) => {
-  res.status(201).json({ message: "welcome to blog app" });
-});
-
 // Routes
 app.use("/api/users", require("./routes/userRoutes"));
 app.use("/api/posts", require("./routes/postRoutes"));
 // displaying the image"
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 
+// Serve Frontend
+if (process.env.NODE_ENV === "production") {
+  // Set build folder as static
+  app.use(express.static(path.join(__dirname, "../frontend/build")));
+  app.get("*", (_, res) => {
+    res.sendFile(path.join(__dirname, "../frontend/build/index.html"));
+  });
+} else {
+  app.get("/", (_, res) => {
+    res.status(200).json({ message: "welcome to the support desk API" });
+  });
+}
 app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
